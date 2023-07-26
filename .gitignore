@@ -1,0 +1,18 @@
+*.iml
+/local.properties
+/.idea
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Gradle generated files
+.gradle
+/gradle
+gradlew
+gradlew.bat
+
+# OS-specific files
+.DS_Store
+.DS_Store?
