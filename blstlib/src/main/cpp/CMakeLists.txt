@@ -9,6 +9,9 @@ cmake_minimum_required(VERSION 3.22.1)
 
 project("blstlib")
 
+set(CMAKE_VERBOSE_MAKEFILE on)
+set(can_use_assembler TRUE)
+enable_language(ASM)
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
@@ -21,7 +24,9 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        blstlib.cpp)
+        blstlib.cpp
+        blst/src/server.c
+        blst/build/assembly.S)
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by

@@ -1,0 +1,3 @@
+[submodule "blstlib/src/main/cpp/blst"]
+	path = blstlib/src/main/cpp/blst
+	url = git@github.com:supranational/blst.git

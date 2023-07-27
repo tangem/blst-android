@@ -16,3 +16,7 @@ gradlew.bat
 # OS-specific files
 .DS_Store
 .DS_Store?
+/blstlib/obj
+/blstlib/src/main/cpp/blst_wrap.cpp
+/blstlib/src/main/java/com/tangem/blstlib/generated
+/blstlib/src/main/jniLibs
