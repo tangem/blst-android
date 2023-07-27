@@ -2,7 +2,7 @@
 Wrapper on blst library to provide .aar with JNI
 
 How to build.
-1. Clone project.
+1. Clone project. Update submodules.
 2. Install NDK using SDK Manager.
 3. Run build.
 4. After SWIG generate .java files open "blstJNI" and replace imClazz.getPackageName() with imClazz.getPackage().getName().
