@@ -79,3 +79,5 @@ tasks.register('runNdkBuild', Exec) {
 }
 
 preBuild.dependsOn runNdkBuild
+
+apply from: 'maven-push.gradle'
