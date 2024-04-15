@@ -25,6 +25,9 @@ jobs:
       with:
         distribution: 'adopt'
         java-version: '17'
+
+    - name: Install Android Dependencies
+      run: tools/install-android-dependencies
     
     - name: Extract branch name
       shell: bash
