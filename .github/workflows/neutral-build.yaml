@@ -26,6 +26,10 @@ jobs:
         distribution: 'adopt'
         java-version: '17'
 
+    - name: Install system dependencies
+      run: |
+        tools/install-sys-dependencies-linux
+
     - name: Install Android Dependencies
       run: |
         tools/install-android-dependencies

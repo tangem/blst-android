@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -e
+
+sudo apt-get update && sudo apt-get install swig3.0
+ln -s /usr/bin/swig3.0 /usr/bin/swig
