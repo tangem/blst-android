@@ -17,13 +17,6 @@ LOCAL_MODULE := blst
 LOCAL_SRC_FILES := blst/src/server.c blst/build/assembly.S blst_wrap.cpp
 L_CFLAGS += -Wno-unused-parameter
 
-$(LOCAL_PATH)/blst:
-	@(cd `dirname $@` && \
-	  mod=`git submodule 2>/dev/null | \
-	       awk '{ if(match($$2,"/blst$$")) print $$2 }'` && \
-	  [ -n "$$mod" ] && ln -s "$$mod" blst \
-	 ) || git clone https://github.com/supranational/blst.git $@
-
 $(LOCAL_PATH)/blst/src/server.c $(LOCAL_PATH)/blst/build/assembly.S: $(LOCAL_PATH)/blst
 
 $(LOCAL_PATH)/blst_wrap.cpp: $(LOCAL_PATH)/blst/bindings/blst.swg
