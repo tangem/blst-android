@@ -6,6 +6,7 @@ plugins {
 android {
     namespace 'com.tangem.blstlib'
     compileSdk 33
+    ndkVersion '24.0.8215888'
 
     defaultConfig {
         minSdk 23
@@ -13,17 +14,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-//        externalNativeBuild {
-//            cmake {
-//                cppFlags ""
-//            }
-//            ndkBuild {
-//                arguments "NDK_PROJECT_PATH=/Users/vladislav/Documents/projects/BlstAndroid/blstlib"
-//                arguments "APP_PLATFORM=22"
-//                arguments "NDK_APPLICATION_MK=/Users/vladislav/Documents/projects/BlstAndroid/blstlib/src/main/cpp/Application.mk"
-//
-//            }
-//        }
     }
 
     sourceSets {
@@ -40,15 +30,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-//    externalNativeBuild {
-//        ndkBuild {
-//            path "src/main/cpp/Android.mk"
-//        }
-////        cmake {
-////            path "src/main/cpp/CMakeLists.txt"
-////            version "3.22.1"
-////        }
-//    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -70,12 +51,15 @@ dependencies {
 
 tasks.register('runNdkBuild', Exec) {
     def ndkDir = android.ndkDirectory
+    def blstlibDir = project.projectDir.path
     executable = "$ndkDir/ndk-build"
-    args = ['APP_BUILD_SCRIPT=/Users/vladislav/Documents/projects/BlstAndroid/blstlib/src/main/cpp/Android.mk',
-            'NDK_PROJECT_PATH=/Users/vladislav/Documents/projects/BlstAndroid/blstlib/',
-            'NDK_LIBS_OUT=src/main/jniLibs',
-            'APP_PLATFORM=23',
-            'NDK_APPLICATION_MK=/Users/vladislav/Documents/projects/BlstAndroid/blstlib/src/main/cpp/Application.mk']
+    args = ["APP_BUILD_SCRIPT=$blstlibDir/src/main/cpp/Android.mk",
+            "NDK_PROJECT_PATH=$blstlibDir",
+            "NDK_LIBS_OUT=src/main/jniLibs",
+            "APP_PLATFORM=23",
+            "NDK_APPLICATION_MK=$blstlibDir/src/main/cpp/Application.mk"]
 }
 
 preBuild.dependsOn runNdkBuild
+
+apply from: 'maven-push.gradle'

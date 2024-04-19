@@ -1,0 +1,26 @@
+#!/bin/bash
+
+find_android_cmdline_tools() {
+    # Default version of cmdline tools is 11.
+    # https://github.com/android-actions/setup-android/blob/9584f05408b63719e3464df8ac85bdbe58f88a64/src/main.ts#L9
+    CMDLINE_TOOLS_VERSION="11.0"
+
+    if [[ "$ANDROID_HOME" == "" ]]; then
+        >&2 echo "ANDROID_HOME is not set. Use a default path"
+        ANDROID_HOME="$HOME/Library/Android/sdk"
+    fi
+
+    # cmdline-tools could have a 'latest' version, but if it was installed 2 years ago it may not be 'latest' as of today
+    if [ -x "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" ]; then
+        echo "$ANDROID_HOME/cmdline-tools/latest/bin"
+        return 0
+    fi
+
+    if [ -x "$ANDROID_HOME/cmdline-tools/$CMDLINE_TOOLS_VERSION/bin/sdkmanager" ]; then
+        echo "$ANDROID_HOME/cmdline-tools/$CMDLINE_TOOLS_VERSION/bin"
+        return 0
+    fi
+
+    >&2 echo "ERROR: cannot find SDK cmdline tools within '$ANDROID_HOME'"
+    exit 22
+}
